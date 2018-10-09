@@ -2,7 +2,7 @@
 
 ## Swagger API Url - http://localhost:8080
 
-##Default DB - H2
+## Default DB - H2
 
 H2-console - http://localhost:8080/h2-console/
   
