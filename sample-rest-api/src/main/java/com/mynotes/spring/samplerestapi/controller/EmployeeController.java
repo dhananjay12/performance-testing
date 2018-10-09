@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mynotes.spring.samplerestapi.exceptions.EntityNotFoundException;
 import com.mynotes.spring.samplerestapi.model.Employee;
 import com.mynotes.spring.samplerestapi.repo.EmployeeRepo;
 
@@ -40,8 +41,14 @@ public class EmployeeController {
 	}
 
 	@DeleteMapping("/{empId}")
-	public void deleteDriver(@PathVariable long empId) {
+	public void deleteDriver(@PathVariable long empId) throws EntityNotFoundException {
+		findEmployee(empId);
 		empRepo.deleteById(empId);
+	}
+
+	private Employee findEmployee(Long empId) throws EntityNotFoundException {
+		return empRepo.findById(empId)
+				.orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + empId));
 	}
 
 }
