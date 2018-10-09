@@ -46,6 +46,12 @@ public class EmployeeController {
 		empRepo.deleteById(empId);
 	}
 
+	@DeleteMapping
+	public void deleteAll() {
+		empRepo.deleteAll();
+		;
+	}
+
 	private Employee findEmployee(Long empId) throws EntityNotFoundException {
 		return empRepo.findById(empId)
 				.orElseThrow(() -> new EntityNotFoundException("Could not find entity with id: " + empId));
